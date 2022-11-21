@@ -84,53 +84,30 @@ int32_t main(){
     freopen("output.txt", "w", stdout);
 #endif
 
-    int n;
-    cin>>n;
-    vi a,b;
-    for(int i=0; i<n; i++){
-        int temp;
-        cin>>temp;
-        a.pb(temp);
-        b.pb(temp);
+
+    string s;
+    cin>>s;
+    int k;
+    cin>>k;
+    int arr[30];
+    int maxi=INT_MIN;
+    for(int i=0;i<26;i++){
+        cin>>arr[i];
+        maxi=max(maxi,arr[i]);
     }
-    sort(b.begin(), b.end());
-    if (a == b)
-    {
-        cout << "yes\n"
-             << "1 1\n";
+    int ans=0;
+    for(int i=0;i<s.length();i++){
+        ans+=(i+1)*arr[s[i]-'a'];
     }
-    else
-    {
-        int l, r;
-        for (int i = 0; i < n - 1; i++)
-        {
-            if (a[i] > a[i + 1])
-            {
-                l = i;
-                break;
-            }
-        }
-        for (int i = n - 1; i > 0; i--)
-        {
-            if (a[i] < a[i - 1])
-            {
-                r = i;
-                break;
-            }
-        }
- 
-        reverse(a.begin() + l, a.begin() + r + 1);
- 
-        if (a == b)
-            cout << "yes\n"
-                 << l + 1 << " " << r + 1 << "\n";
-        else
-            cout << "no\n";
-
-
-
-
-
+    int val=s.length()+1;
+    while(k--){
+        ans+=val*maxi;
+        val++;
     }
+    print(ans);
+
+
+
+
     return 0;
 }
