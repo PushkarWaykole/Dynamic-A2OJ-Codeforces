@@ -71,17 +71,8 @@ ostream &operator <<(ostream & os, const map<F,S> &v){os << "[";oldfor(v){if(it!
 
 // Constants
 const int MOD = 1000000007;
-map<int,int> graph;
-map<int,int> visited;
 
-int dfs(int node,int depth,int target){
-    if(visited[node]) return -1;
-    else if(node==target){
-        return depth;
-    }
-    visited[node] =1;
-    return dfs(graph[node],depth+1,target);
-}
+
 
 int32_t main(){
 
@@ -93,17 +84,21 @@ int32_t main(){
     freopen("output.txt", "w", stdout);
 #endif
 
-
-    
-    int n,s,t;
-    cin>>n>>s>>t;
-    for(int i=1;i<=n;i++){
-        int x;
-        cin>>x;
-        graph[i]=x;
-
+    int n;
+    cin>>n;
+    // n to eats all nuts and n-1 to make jumps
+    vi arr(n);
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
     }
-    print(dfs(s,0,t));
+    int ans=n+n-1;
+    ans+=arr[0];
+    for(int i=0;i<n-1;i++){
+        ans+=abs(arr[i]-arr[i+1]);
+    }
+    print(ans);
+
+
 
 
 
